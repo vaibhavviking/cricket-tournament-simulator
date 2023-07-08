@@ -15,8 +15,18 @@ CTS is a simple console program that can simulate a cricket tournament containin
 
 ## How to run
 
-- Clone this repository in a folder of your choice
-- run the command 'python main.py' to execute the top level script (replace 'python' with the alias of your python version)
+- Clone this repository in a folder of your choice:
+```sh
+git clone https://github.com/vaibhavviking/cricket-tournament-simulator.git
+```
+- Install numpy library if required:
+```sh
+pip install numpy
+```
+- Run the following command to execute the top level script  (replace 'python' with the alias of your python version)
+```sh
+python main.py
+```
 - Enter the required data into the console
 - Wait for the simulation to be over and a winning team to be decided
 
