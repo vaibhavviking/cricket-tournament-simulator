@@ -35,29 +35,34 @@ class Match:
 
     def __init__(self,teamA,teamB,homeOf,overs,umpireProb):
         self.teams = []
-        randNum = np.random.uniform(1)
+        self.commentator = Commentator()
+        self.overs = overs
+        self.target = None
+
+        randNum = np.random.uniform(1) # toss
         batFirst = teamA
-        if randNum>0.5: # toss
-            print('Team A has won the toss')
+        if randNum>0.5: 
+            self.commentator.announce(f'{teamA.name} has won the toss')
             if homeOf == teamA or homeOf.field.fieldSize<65:  # if ground is small or is home ground winning team chooses to bat first
-                print('Team A has elected to bat first')
+                self.commentator.announce(f'{teamA.name} has elected to bat first')
                 self.teams = [teamA,teamB]
             else:
-                print('Team A has elected to bowl first')
+                self.commentator.announce(f'{teamA.name} has elected to bowl first')
                 self.teams = [teamB,teamA]
                 batFirst = teamB                
         else:
+            self.commentator.announce(f'{teamB.name} has won the toss')
             if homeOf==teamB or homeOf.field.fieldSize<65: 
-                print('Team B has elected to bat first')
+                self.commentator.announce(f'{teamB.name} has elected to bat first')
                 self.teams = [teamB,teamA]
                 batFirst = teamB
             else:
-                print('Team B has elected to bowl first')
+                self.commentator.announce(f'{teamB.name} has elected to bowl first')
                 self.teams = [teamA,teamB]
-        self.overs = overs
+        
         self.umpire = Umpire(self.teams[0],self.teams[1],umpireProb,batFirst)
-        self.target = None
-        self.commentator = Commentator()
+        
+        
 
     def playBall(self):
         """

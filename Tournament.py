@@ -28,12 +28,13 @@ class Tournament:
         conducts the finale of the tournament
     """
     
-    def __init__(self,teams):
+    def __init__(self,teams,overs):
         self.teams = teams
         self.matchesPlayed = 0
         self.status = {}
         self.commentator = Commentator()
-        
+        self.overs = overs
+
         # all the teams have 0 stats initially
         for team in teams:
             self.status[team.name]={}
@@ -59,6 +60,9 @@ class Tournament:
                     loserTeam = self.playMatch(teamA,teamB,userPrompt)
                     
                     self.commentator.announce('Onto the next match!')
+        print('')
+        print('--------FINAL MATCH OF THE TOURNAMENT-------')
+
 
     def playMatch(self,teamA,teamB,userPrompt):
         """
@@ -74,7 +78,7 @@ class Tournament:
         self.status[teamA.name]['matches_played'] += 1
         self.status[teamB.name]['matches_played'] += 1
 
-        myMatch = Match(teamA,teamB,teamA,2,0.6) # conduct match
+        myMatch = Match(teamA,teamB,teamA,self.overs,0.6) # conduct match
         
         loserTeam = teamB
         result=[0]
@@ -119,7 +123,7 @@ class Tournament:
         teamA (Team) : Team which is on top after league matches
         teamB (Team) : Team which is on 2nd after league matches
         """
-        
+        self.commentator.announce(f'The final match is between {teamA.name} and {teamB.name}')
         loserTeam = self.playMatch(teamA,teamB,userPrompt) 
         winnerTeam = teamA
         if loserTeam == teamA:

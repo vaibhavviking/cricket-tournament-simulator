@@ -13,13 +13,18 @@ def enablePrint():
     sys.stdout = sys.__stdout__
 
 def main():
-    numTeams = int(input("Enter the number of teams: "))
+    numTeams = 0
+    while numTeams < 2:
+        numTeams = int(input("Enter the number of teams (atleast 2): "))
+    overs = 0
+    while overs < 1:
+        overs = int(input("Enter the number of overs per match (minimum 1): "))
     teams = []
     for i in range(numTeams):
         teamName = input(f'Enter the name for team no. {i+1} : ')
         teams.append(generateTeam(teamName))
 
-    myTourney = Tournament(teams) # create an instance of a Tournament
+    myTourney = Tournament(teams,overs) # create an instance of a Tournament
 
     userPrompt = int(input('Enter 1 if you wish to prompted after every ball otherwise 0: '))
 
